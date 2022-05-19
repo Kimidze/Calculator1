@@ -18,13 +18,13 @@ public class Main {
         Integer result = 0;
         boolean arabic = true;
         String parts[] = input.split(" ");
-        if (parts.length < 3) {
-            throw new ArrayIndexOutOfBoundsException("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+        if (parts.length > 3) {
+            throw new ArrayIndexOutOfBoundsException("Введены неккоректные данные");
         }
         try {
             value1 = Integer.parseInt(parts[0]);
             value2 = Integer.parseInt(parts[2]);
-        } catch (NumberFormatException t) {
+        } catch (NumberFormatException e) {
             arabic = false;
             value1 = Converter.convertToInt(parts[0]);
             value2 = Converter.convertToInt(parts[2]);
@@ -46,8 +46,8 @@ public class Main {
             result = value1 / value2;
         }
         if (arabic == false) {
-            if (result < 0) {
-                throw new IllegalArgumentException("Римское число не может быть отрицательным");
+            if (result <= 0) {
+                throw new IllegalArgumentException("Римское число не может быть отрицательным или равным нулю");
             }
             System.out.println(Converter.convertResultToRomes(result));
         }
